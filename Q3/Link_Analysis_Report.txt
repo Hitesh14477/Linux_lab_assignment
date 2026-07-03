@@ -1,0 +1,145 @@
+====================================================
+Link Analysis Report
+File System and Link Analysis
+====================================================
+
+Name:Hitesh
+Date:3/6/2026
+System: Darwin Kernel Version 25.5.0
+
+1. Create Original File
+
+Command:
+touch original.txt
+
+Output:
+(No output)
+
+Observation:
+The `touch` command created an empty file named `original.txt`. Linux does not display any output when the command executes successfully.
+
+Command:
+echo "Linux Link Analysis" > original.txt
+
+Output:
+(No output)
+
+Observation:
+The text was written to `original.txt`. This file will be used to demonstrate hard and symbolic links.
+
+2. Create Hard Link
+
+Command:
+ln original.txt hard_link.txt
+
+Output:
+(No output)
+
+Observation:
+A hard link named `hard_link.txt` was created. Both filenames now reference the same inode and underlying file data.
+
+3. Create Symbolic Link
+
+Command:
+ln -s original.txt symbolic_link.txt
+
+Output:
+(No output)
+
+Observation:
+A symbolic link named `symbolic_link.txt` was created. It stores the path to the original file instead of sharing its inode.
+
+4. Display Inode Numbers
+
+Command:
+ls -li
+
+Output:
+total 16
+41600911 drwxr-xr-x@ 5 hiteshchoudhary  staff  160 Jul  3 20:55 Project_Workspace
+41598305 drwxr-xr-x@ 4 hiteshchoudhary  staff  128 Jul  3 20:34 Q1
+41599365 drwxr-xr-x@ 4 hiteshchoudhary  staff  128 Jul  3 20:58 Q2
+41601410 drwxr-xr-x@ 3 hiteshchoudhary  staff   96 Jul  3 21:00 Q3
+41602179 -rw-r--r--@ 2 hiteshchoudhary  staff   20 Jul  3 21:04 hard_link.txt
+41602179 -rw-r--r--@ 2 hiteshchoudhary  staff   20 Jul  3 21:04 original.txt
+41602209 lrwxr-xr-x@ 1 hiteshchoudhary  staff   12 Jul  3 21:04 symbolic_link.txt -> original.txt
+
+Observation:
+The inode numbers show that `original.txt` and `hard_link.txt` share the same inode, while `symbolic_link.txt` has a different inode because it is a separate file that points to the original.
+
+5. Collect File Metadata
+
+Command:
+stat original.txt hard_link.txt symbolic_link.txt
+
+Output:
+16777233 41602179 -rw-r--r-- 2 hiteshchoudhary staff 0 20 "Jul  3 21:04:18 2026" "Jul  3 21:04:02 2026" "Jul  3 21:04:16 2026" "Jul  3 21:03:41 2026" 4096 8 0 original.txt
+16777233 41602179 -rw-r--r-- 2 hiteshchoudhary staff 0 20 "Jul  3 21:04:18 2026" "Jul  3 21:04:02 2026" "Jul  3 21:04:16 2026" "Jul  3 21:03:41 2026" 4096 8 0 hard_link.txt
+16777233 41602209 lrwxr-xr-x 1 hiteshchoudhary staff 0 12 "Jul  3 21:04:32 2026" "Jul  3 21:04:32 2026" "Jul  3 21:04:32 2026" "Jul  3 21:04:32 2026" 4096 0 0 symbolic_link.txt
+
+Observation:
+The `stat` command displays metadata such as file size, permissions, timestamps, and inode numbers. It provides detailed information about each file and link.
+
+6. Delete the Original File
+
+Command:
+rm original.txt
+
+Output:
+(No output)
+
+Observation:
+The original filename was removed. This allows us to observe how hard links and symbolic links behave after the original file is deleted.
+
+7. Verify Link Behavior
+
+Command:
+ls -li
+
+Output:
+total 8
+41600911 drwxr-xr-x@ 5 hiteshchoudhary  staff  160 Jul  3 20:55 Project_Workspace
+41598305 drwxr-xr-x@ 4 hiteshchoudhary  staff  128 Jul  3 20:34 Q1
+41599365 drwxr-xr-x@ 4 hiteshchoudhary  staff  128 Jul  3 20:58 Q2
+41601410 drwxr-xr-x@ 3 hiteshchoudhary  staff   96 Jul  3 21:00 Q3
+41602179 -rw-r--r--@ 1 hiteshchoudhary  staff   20 Jul  3 21:04 hard_link.txt
+41602209 lrwxr-xr-x@ 1 hiteshchoudhary  staff   12 Jul  3 21:04 symbolic_link.txt -> original.txt
+
+Observation:
+The directory listing confirms that the original file has been deleted while the remaining links still exist.
+
+Command:
+cat hard_link.txt
+
+Output:
+Linux Link Analysis
+
+Observation:
+The hard link still contains the original data because it references the same inode as the deleted file.
+
+Command:
+cat symbolic_link.txt
+
+Output:
+cat: symbolic_link.txt: No such file or directory
+
+Observation:
+The symbolic link no longer works because it points to a file that has been deleted. Attempting to access it results in an error.
+
+8. Comparison of Hard Link and Symbolic Link
+
+Hard Link:
+- Shares the same inode as the original file.
+- Continues to access the data after the original filename is deleted.
+- Cannot span different file systems.
+
+Symbolic Link:
+- Has its own inode.
+- Stores the pathname of the target file.
+- Becomes a broken link if the original file is deleted.
+- Can point to files on different file systems.
+
+9. Conclusions
+
+The experiment demonstrates the key differences between hard links and symbolic links. Hard links directly reference the same file data and remain usable after deleting the original filename. Symbolic links only store the path to the original file, so they become invalid when the target file is removed.
+

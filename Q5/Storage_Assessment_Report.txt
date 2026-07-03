@@ -1,0 +1,122 @@
+====================================================
+Storage Assessment Report
+Storage Health Assessment and Documentation
+====================================================
+
+Name:Hitesh
+Date:3/6/2026
+System: macOS (Darwin Kernel Version 25.5.0)
+
+1. Available Storage Devices
+
+Command:
+diskutil list | head -n 15
+
+Output:
+/dev/disk0 (internal, physical):
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:      GUID_partition_scheme                        *500.3 GB   disk0
+   1:             Apple_APFS_ISC Container disk1         524.3 MB   disk0s1
+   2:                 Apple_APFS Container disk3         494.4 GB   disk0s2
+   3:        Apple_APFS_Recovery Container disk2         5.4 GB     disk0s3
+
+/dev/disk3 (synthesized):
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:      APFS Container Scheme -                      +494.4 GB   disk3
+                                 Physical Store disk0s2
+   1:                APFS Volume Macintosh HD            12.6 GB    disk3s1
+   2:              APFS Snapshot com.apple.os.update-... 12.6 GB    disk3s1s1
+   3:                APFS Volume Preboot                 9.0 GB     disk3s2
+   4:                APFS Volume Recovery                1.3 GB     disk3s3
+
+Observation:
+The `diskutil list` command displays first 15 available storage devices and their partitions. It provides information about physical disks, partition layouts, and storage identifiers.
+
+2. Mounted File Systems
+
+Command:
+mount | head -n 10
+
+Output:
+/dev/disk3s1s1 on / (apfs, sealed, local, read-only, journaled)
+devfs on /dev (devfs, local, nobrowse)
+/dev/disk3s6 on /System/Volumes/VM (apfs, local, noexec, journaled, noatime, nobrowse)
+/dev/disk3s2 on /System/Volumes/Preboot (apfs, local, journaled, nobrowse)
+/dev/disk3s4 on /System/Volumes/Update (apfs, local, journaled, nobrowse)
+/dev/disk1s2 on /System/Volumes/xarts (apfs, local, noexec, journaled, noatime, nobrowse)
+/dev/disk1s1 on /System/Volumes/iSCPreboot (apfs, local, journaled, nobrowse)
+/dev/disk1s3 on /System/Volumes/Hardware (apfs, local, journaled, nobrowse)
+/dev/disk3s5 on /System/Volumes/Data (apfs, local, journaled, nobrowse, protect, root data)
+map auto_home on /System/Volumes/Data/home (autofs, automounted, nobrowse)
+
+Observation:
+The `mount` command lists first 10 currently mounted file systems. It shows the mount points, file system types, and mount options used by the operating system.
+
+3. Disk Usage Statistics
+
+Command:
+df -h
+
+Output:
+Filesystem                                                 Size    Used   Avail Capacity iused ifree %iused  Mounted on
+/dev/disk3s1s1                                            460Gi    12Gi   309Gi     4%    459k  3.2G    0%   /
+devfs                                                     220Ki   220Ki     0Bi   100%     762     0  100%   /dev
+/dev/disk3s6                                              460Gi   1.0Gi   309Gi     1%       1  3.2G    0%   /System/Volumes/VM
+/dev/disk3s2                                              460Gi   8.4Gi   309Gi     3%    1.4k  3.2G    0%   /System/Volumes/Preboot
+/dev/disk3s4                                              460Gi   2.1Mi   309Gi     1%      68  3.2G    0%   /System/Volumes/Update
+/dev/disk1s2                                              500Mi   6.0Mi   482Mi     2%       1  4.9M    0%   /System/Volumes/xarts
+/dev/disk1s1                                              500Mi   6.0Mi   482Mi     2%      32  4.9M    0%   /System/Volumes/iSCPreboot
+/dev/disk1s3                                              500Mi   1.5Mi   482Mi     1%      98  4.9M    0%   /System/Volumes/Hardware
+/dev/disk3s5                                              460Gi   129Gi   309Gi    30%    1.3M  3.2G    0%   /System/Volumes/Data
+map auto_home                                               0Bi     0Bi     0Bi   100%       0     0     -   /System/Volumes/Data/home
+/dev/disk4s2                                              2.1Gi   1.7Gi   448Mi    80%    3.7k  4.3G    0%   /Volumes/CapCut
+/dev/disk5s1                                              247Mi   245Mi   2.4Mi   100%    2.3k  4.3G    0%   /Volumes/ProtonVPN
+/dev/disk7s1                                              2.5Gi   2.1Gi   367Mi    86%    6.3k  3.8M    0%   /Volumes/CapCut 1
+/dev/disk8s1                                              981Mi   742Mi   239Mi    76%    1.7k  4.3G    0%   /Volumes/Claude
+/Users/hiteshchoudhary/Downloads/Visual Studio Code.app   460Gi   128Gi   310Gi    30%    1.3M  3.2G    0%   /private/var/folders/xv/r1wh00fj7wnbvf_5hctycpz80000gn/T/AppTranslocation/1AFA428D-F4C8-43FD-B537-7C6AD1846801
+
+Observation:
+The `df -h` command displays disk usage in a human-readable format. It reports the total size, used space, available space, and usage percentage for each mounted file system.
+
+4. Inode Utilization
+
+Command:
+df -i
+
+Output:
+Filesystem                                              512-blocks      Used Available Capacity iused      ifree %iused  Mounted on
+/dev/disk3s1s1                                           965595304  24547760 648615736     4%  458725 3243078680    0%   /
+devfs                                                          440       440         0   100%     762          0  100%   /dev
+/dev/disk3s6                                             965595304   2097192 648615736     1%       1 3243078680    0%   /System/Volumes/VM
+/dev/disk3s2                                             965595304  17522800 648615736     3%    1427 3243078680    0%   /System/Volumes/Preboot
+/dev/disk3s4                                             965595304      4208 648615736     1%      68 3243078680    0%   /System/Volumes/Update
+/dev/disk1s2                                               1024000     12328    986592     2%       1    4932960    0%   /System/Volumes/xarts
+/dev/disk1s1                                               1024000     12224    986592     2%      32    4932960    0%   /System/Volumes/iSCPreboot
+/dev/disk1s3                                               1024000      3136    986592     1%      98    4932960    0%   /System/Volumes/Hardware
+/dev/disk3s5                                             965595304 269947800 648615736    30% 1319282 3243078680    0%   /System/Volumes/Data
+map auto_home                                                    0         0         0   100%       0          0     -   /System/Volumes/Data/home
+/dev/disk4s2                                               4405248   3487760    917488    80%    3665 4294963614    0%   /Volumes/CapCut
+/dev/disk5s1                                                506408    501544      4864   100%    2304 4294964975    0%   /Volumes/ProtonVPN
+/dev/disk7s1                                               5158800   4386896    751528    86%    6312    3757640    0%   /Volumes/CapCut 1
+/dev/disk8s1                                               2009008   1520200    488808    76%    1725 4294965554    0%   /Volumes/Claude
+/Users/hiteshchoudhary/Downloads/Visual Studio Code.app  965595304 269229920 649333616    30% 1318032 3246668080    0%   /private/var/folders/xv/r1wh00fj7wnbvf_5hctycpz80000gn/T/AppTranslocation/1AFA428D-F4C8-43FD-B537-7C6AD1846801
+
+Observation:
+The `df -i` command displays inode usage statistics for mounted file systems. Inodes store metadata about files, and monitoring inode usage helps identify file system capacity issues.
+
+5. Storage Health Observations
+
+Observation:
+The storage devices and mounted file systems were successfully identified. Disk usage and inode utilization indicate the current storage status. No abnormal storage usage or resource limitations were observed during the assessment.
+
+6. Recommendations for Improving Storage Utilization
+
+- Regularly remove unnecessary files and temporary data.
+- Monitor disk usage to prevent storage from reaching capacity.
+- Archive old logs and backups to external storage if required.
+- Periodically review mounted file systems and available space.
+- Monitor inode utilization on systems containing a large number of small files.
+
+Summary
+
+The storage assessment successfully identified the available storage devices, mounted file systems, disk usage, and inode utilization. The collected information provides an overview of the system's storage health and can assist in planning future storage requirements.

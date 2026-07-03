@@ -1,0 +1,197 @@
+====================================================
+Project Workspace Report
+Secure Project Workspace Setup
+====================================================
+
+Name:Hitesh
+Date:3/6/2026
+System: Darwin Kernel Version 25.5.0
+
+
+1. Create Project Workspace
+
+
+Command:
+mkdir Project_Workspace
+
+Output:
+(no output)
+
+Observation:
+The `mkdir` command creates a new directory named `Project_Workspace`.
+This directory serves as the main workspace for storing project files.
+
+
+
+Command:
+cd Project_Workspace
+
+Output:
+(no output)
+
+Observation:
+The `cd` command changes the current working directory to the newly created project workspace.
+All subsequent operations will be performed inside this directory.
+
+
+
+Command:
+mkdir docs src backup
+
+Output:
+<Paste your output here>
+
+Observation:
+Three subdirectories were created to organize documentation, source code, and backups.
+This structure helps keep project files organized and easy to manage.
+
+
+2. Directory Structure
+
+
+Command:
+tree
+
+(If `tree` is unavailable, use `ls -R`.)
+
+Output:
+backup  docs    src
+
+./backup:
+
+./docs:
+
+./src:
+
+Observation:
+The directory structure shows the project workspace and its subdirectories.
+This confirms that the required folders were created successfully.
+
+
+3. File Permissions Before Modification
+
+
+Command:
+ls -ld . docs src backup
+
+Output:
+drwxr-xr-x@ 5 hiteshchoudhary  staff  160 Jul  3 20:55 .
+drwxr-xr-x@ 2 hiteshchoudhary  staff   64 Jul  3 20:55 backup
+drwxr-xr-x@ 2 hiteshchoudhary  staff   64 Jul  3 20:55 docs
+drwxr-xr-x@ 2 hiteshchoudhary  staff   64 Jul  3 20:55 src
+
+Observation:
+This command displays the permissions of the workspace directories before any modifications.
+The output shows the default permissions assigned during directory creation.
+
+
+4. Create Sample Files
+
+
+Command:
+touch docs/readme.txt src/main.sh backup/backup.txt
+
+Output:
+(no output)
+
+Observation:
+The `touch` command creates empty files in each directory.
+These files will be used to demonstrate permission and ownership changes.
+
+
+5. Modify File Permissions
+
+
+Command:
+chmod 750 docs
+
+Output:
+<Paste your output here>
+
+Observation:
+The permissions of the `docs` directory were modified.
+Only the owner has full access, while group members have limited access and others have no access.
+
+
+
+Command:
+chmod 640 docs/readme.txt
+
+Output:
+<Paste your output here>
+
+Observation:
+The permissions of `readme.txt` were updated.
+The owner has read/write access, the group has read-only access, and others have no access.
+
+
+6. Verify Permissions After Modification
+
+
+Command:
+ls -lR
+
+Output:
+total 0
+drwxr-xr-x@ 3 hiteshchoudhary  staff  96 Jul  3 20:56 backup
+drwxr-x---@ 3 hiteshchoudhary  staff  96 Jul  3 20:56 docs
+drwxr-xr-x@ 3 hiteshchoudhary  staff  96 Jul  3 20:56 src
+
+./backup:
+total 0
+-rw-r--r--@ 1 hiteshchoudhary  staff  0 Jul  3 20:56 backup.txt
+
+./docs:
+total 0
+-rw-r-----@ 1 hiteshchoudhary  staff  0 Jul  3 20:56 readme.txt
+
+./src:
+total 0
+-rw-r--r--@ 1 hiteshchoudhary  staff  0 Jul  3 20:56 main.sh
+
+Observation:
+The recursive listing displays the updated permissions for all files and directories.
+The changes confirm that the permission modifications were applied successfully.
+
+
+7. Ownership Details
+
+
+Command:
+ls -l
+
+Output:
+total 0
+drwxr-xr-x@ 3 hiteshchoudhary  staff  96 Jul  3 20:56 backup
+drwxr-x---@ 3 hiteshchoudhary  staff  96 Jul  3 20:56 docs
+drwxr-xr-x@ 3 hiteshchoudhary  staff  96 Jul  3 20:56 src
+
+Observation:
+This command displays the owner and group associated with each file and directory.
+Ownership determines which users have administrative control over the project workspace.
+
+
+8. Umask Value
+
+
+Command:
+umask
+
+Output:
+022
+
+Observation:
+The `umask` command displays the default permission mask used when creating new files and directories.
+It helps administrators enforce consistent default permissions.
+
+
+9. Explanation of How Permissions Protect Project Data
+
+Linux permissions protect project data by controlling who can read, write, and execute files and directories. Restricting permissions prevents unauthorized users from modifying or accessing sensitive project files, improving the overall security of the workspace.
+
+
+Summary
+
+
+A secure project workspace was successfully created and organized into separate directories. File permissions and ownership were verified, appropriate permission changes were applied, and the system's default umask value was examined. These security measures help protect project data from unauthorized access and accidental modification.
+

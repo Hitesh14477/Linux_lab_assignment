@@ -1,0 +1,88 @@
+====================================================
+Environment Report
+Linux Environment Verification
+====================================================
+
+Name:Hitesh
+Date:3/6/2026
+System: Darwin Kernel Version 25.5.0
+
+
+1. Username and Groups
+
+Command:
+whoami
+
+Output:
+hiteshchoudhary
+
+Observation:
+The `whoami` command displays the username of the currently logged-in user.
+The output confirms which account is currently using the Linux system.
+
+
+2. Current Shell
+
+Command:
+echo $SHELL
+
+Output:
+/bin/zsh
+
+Observation:
+This command displays the default shell being used by the current session.
+The output identifies the command interpreter responsible for executing terminal commands.
+
+
+3. Current Working Directory
+
+Command:
+pwd
+
+Output:
+/Users/hiteshchoudhary/linux_lab_assignment
+
+Observation:
+The `pwd` command prints the absolute path of the current working directory.
+It confirms the location from which terminal commands are being executed.
+
+
+4. Files and Directories in Workspace
+
+Command:
+ls -al
+
+Output:
+total 0
+drwxr-xr-x   3 hiteshchoudhary  staff    96 Jul  3 20:20 .
+drwxr-x---+ 39 hiteshchoudhary  staff  1248 Jul  3 20:23 ..
+drwxr-xr-x@  3 hiteshchoudhary  staff    96 Jul  3 20:20 Q1
+
+Observation:
+The `ls -al` command lists all files and directories, including hidden files.
+The detailed listing shows permissions, ownership, file sizes, and modification dates.
+
+
+5. Network Connectivity Verification
+
+Command:
+ping -c 4 google.com
+
+Output:
+PING google.com (142.250.118.113): 56 data bytes
+64 bytes from 142.250.118.113: icmp_seq=0 ttl=108 time=43.914 ms
+64 bytes from 142.250.118.113: icmp_seq=1 ttl=108 time=45.716 ms
+64 bytes from 142.250.118.113: icmp_seq=2 ttl=108 time=49.052 ms
+64 bytes from 142.250.118.113: icmp_seq=3 ttl=108 time=48.799 ms
+
+Observation:
+The `ping` command checks network connectivity by sending packets to a remote host.
+Successful replies indicate that the system has working network connectivity.
+
+
+
+Summary
+The Linux environment was successfully verified. The user account, shell,
+current working directory, workspace contents, and network connectivity
+were checked. The system appears to be functioning correctly and is ready
+for use.
